@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Verb Quest: Recount Text & Zoo Adventure</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zooOrange: '#F97316',
+                        zooOrangeDark: '#EA580C',
+                        zooOrangeLight: '#FFEDD5',
+                        zooGreen: '#16A34A',
+                        zooGreenDark: '#15803D',
+                        zooGreenLight: '#DCFCE7',
+                        zooYellow: '#FACC15',
+                        zooBg: '#FEFCE8'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        quicksand: ['Quicksand', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FEFCE8;
+            background-image: radial-gradient(#BBF7D0 1.5px, transparent 1.5px), radial-gradient(#FED7AA 1.5px, #FEFCE8 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #FEF3C7;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #16A34A;
+            border-radius: 10px;
+        }
+        .badge-glow {
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+        }
+        .card-bounce {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-bounce:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.25);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between custom-scrollbar selection:bg-orange-200 selection:text-orange-900">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-gradient-to-r from-emerald-700 via-green-600 to-orange-500 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('main-menu-view')">
+                <div class="w-10 h-10 bg-amber-300 text-emerald-900 rounded-full flex items-center justify-center font-bold text-xl shadow-md border-2 border-white">
+                    <i class="fa-solid me-0.5 fa-hippo text-emerald-800"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold tracking-wide leading-none">Safari Verb Quest</h1>
+                    <p class="text-xs text-amber-200 font-medium">Recount Text & Zoo Verbs</p>
+                </div>
+            </div>
+
+            <!-- Profile Tag -->
+            <div id="user-header-profile" class="hidden items-center space-x-3 bg-white/20 px-3 py-1.5 rounded-full backdrop-blur-md border border-white/30">
+                <div class="text-right">
+                    <span id="header-user-name" class="block text-xs font-bold leading-tight">Student</span>
+                    <span id="header-user-class" class="inline-block bg-amber-400 text-slate-900 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">Class 7A</span>
+                </div>
+                <button onclick="logout()" title="Switch User" class="w-8 h-8 bg-red-500/80 hover:bg-red-600 rounded-full flex items-center justify-center text-xs transition">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container Dynamic Views -->
+    <main class="max-w-5xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- VIEW 1: IDENTITY LOGIN -->
+        <section id="identity-view" class="space-y-6 max-w-lg mx-auto py-8">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-amber-400 text-center relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 w-28 h-28 bg-emerald-100 rounded-full flex items-end justify-start p-4 text-emerald-600 opacity-60">
+                    <i class="fa-solid fa-tree text-5xl"></i>
+                </div>
+                <div class="absolute -left-8 -bottom-8 w-28 h-28 bg-orange-100 rounded-full flex items-start justify-end p-4 text-orange-500 opacity-60">
+                    <i class="fa-solid fa-paw text-5xl"></i>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-gradient-to-tr from-orange-500 to-amber-400 text-white rounded-full mx-auto flex items-center justify-center shadow-lg text-4xl mb-4 border-4 border-white">
+                        <i class="fa-solid fa-compass text-amber-100"></i>
+                    </div>
+
+                    <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-1">Welcome Explorer!</h2>
+                    <p class="text-slate-600 text-sm mb-6">Enter your details to start your English Safari Journey.</p>
+
+                    <form id="identity-form" onsubmit="handleIdentitySubmit(event)" class="space-y-5 text-left">
+                        <div>
+                            <label for="student-name" class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input type="text" id="student-name" required placeholder="e.g. Alex Pratama" class="w-full pl-10 pr-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition text-slate-800 font-semibold">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Your Class</label>
+                            <div class="grid grid-cols-3 gap-2" id="class-options">
+                                <!-- Generated by JS for 7A to 7I -->
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-orange-200 transform active:scale-95 transition flex items-center justify-center space-x-2">
+                            <span>Start Safari Adventure</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: MAIN MENU DASHBOARD -->
+        <section id="main-menu-view" class="hidden space-y-6">
+            <!-- Welcome Banner -->
+            <div class="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-700 text-white rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="bg-amber-400 text-slate-900 font-bold text-xs uppercase px-3 py-1 rounded-full mb-3 inline-block shadow">
+                        Grade 7 • Recount Text & Verbs
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-2">Ready to Explore, <span id="dash-user-name" class="text-amber-300">Explorer</span>!</h2>
+                    <p class="text-emerald-100 text-sm md:text-base mb-4">
+                        Master the purpose of recount texts and conquer zoo-related past-tense action verbs through fun lessons, quizzes, and games.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs flex items-center space-x-2 border border-white/20">
+                            <i class="fa-solid fa-bullseye text-amber-300"></i>
+                            <span>Goal: Past Tense Mastery</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs flex items-center space-x-2 border border-white/20">
+                            <i class="fa-solid fa-book-open text-emerald-200"></i>
+                            <span>10 Practice + 20 Assessment Items</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute right-2 bottom-0 opacity-20 md:opacity-30 pointer-events-none">
+                    <i class="fa-solid fa-elephant text-9xl text-white"></i>
+                </div>
+            </div>
+
+            <!-- Menu Navigation Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Materials Card -->
+                <div onclick="navigateTo('materials-view')" class="card-bounce cursor-pointer bg-white rounded-3xl p-6 border-2 border-emerald-200 shadow-md flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-1">1. Learning Materials</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                            Learn recount text definition, generic structure, recount purpose, and 15+ zoo past verbs with audio pronunciation.
+                        </p>
+                    </div>
+                    <div class="flex items-center text-emerald-600 font-bold text-sm">
+                        <span>Start Learning</span>
+                        <i class="fa-solid fa-chevron-right ml-2 text-xs transition group-hover:translate-x-1"></i>
+                    </div>
+                </div>
+
+                <!-- Practice Card -->
+                <div onclick="navigateTo('practice-view')" class="card-bounce cursor-pointer bg-white rounded-3xl p-6 border-2 border-amber-200 shadow-md flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-pen-ruler"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-1">2. Interactive Practice</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                            Test your understanding with 10 Multiple Choice, 5 Fill-in-the-Blanks, and 5 Matching exercises with instant feedback.
+                        </p>
+                    </div>
+                    <div class="flex items-center text-amber-600 font-bold text-sm">
+                        <span>Practice Now</span>
+                        <i class="fa-solid fa-chevron-right ml-2 text-xs transition group-hover:translate-x-1"></i>
+                    </div>
+                </div>
+
+                <!-- Assessment Card -->
+                <div onclick="navigateTo('assessment-view')" class="card-bounce cursor-pointer bg-white rounded-3xl p-6 border-2 border-orange-200 shadow-md flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-1">3. Final Assessment</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                            Formal test section with 20 varied items. Earn your official Safari Explorer Certificate!
+                        </p>
+                    </div>
+                    <div class="flex items-center text-orange-600 font-bold text-sm">
+                        <span>Take Assessment</span>
+                        <i class="fa-solid fa-chevron-right ml-2 text-xs transition group-hover:translate-x-1"></i>
+                    </div>
+                </div>
+
+                <!-- Mini Game Card -->
+                <div onclick="navigateTo('game-view')" class="card-bounce cursor-pointer bg-white rounded-3xl p-6 border-2 border-teal-200 shadow-md flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-1">4. Safari Verb Dash Game</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                            Fast-paced mini game! Feed animals by selecting the correct past verb before time runs out.
+                        </p>
+                    </div>
+                    <div class="flex items-center text-teal-600 font-bold text-sm">
+                        <span>Play Game</span>
+                        <i class="fa-solid fa-chevron-right ml-2 text-xs transition group-hover:translate-x-1"></i>
+                    </div>
+                </div>
+
+                <!-- Reflection Card -->
+                <div onclick="navigateTo('reflection-view')" class="card-bounce cursor-pointer bg-white rounded-3xl p-6 border-2 border-lime-200 shadow-md flex flex-col justify-between group md:col-span-2 lg:col-span-2">
+                    <div>
+                        <div class="w-14 h-14 bg-lime-100 text-lime-700 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-1">5. Learning Reflection</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-4">
+                            Evaluate what you learned today, mark your confidence levels, and save your personal zoo learning journal.
+                        </p>
+                    </div>
+                    <div class="flex items-center text-lime-700 font-bold text-sm">
+                        <span>Reflect & Review</span>
+                        <i class="fa-solid fa-chevron-right ml-2 text-xs transition group-hover:translate-x-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: LEARNING MATERIALS -->
+        <section id="materials-view" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <button onclick="navigateTo('main-menu-view')" class="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Dashboard</span>
+                </button>
+                <h2 class="text-2xl font-bold text-emerald-800">Learning Materials</h2>
+            </div>
+
+            <!-- Material Tabs -->
+            <div class="flex flex-wrap sm:flex-nowrap bg-amber-100/80 p-1.5 rounded-2xl gap-1 border border-amber-200 text-xs md:text-sm font-bold">
+                <button onclick="switchMaterialTab('tab-recount')" id="btn-tab-recount" class="flex-1 py-2.5 rounded-xl transition bg-white text-emerald-800 shadow-sm text-center">
+                    1. Recount Concept
+                </button>
+                <button onclick="switchMaterialTab('tab-animals')" id="btn-tab-animals" class="flex-1 py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 text-center">
+                    2. Zoo Animals
+                </button>
+                <button onclick="switchMaterialTab('tab-verbs')" id="btn-tab-verbs" class="flex-1 py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 text-center">
+                    3. Zoo Past Verbs
+                </button>
+                <button onclick="switchMaterialTab('tab-sample')" id="btn-tab-sample" class="flex-1 py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 text-center">
+                    4. Sample Story
+                </button>
+            </div>
+
+            <!-- Tab 1 Content: Recount Text Concept -->
+            <div id="tab-recount" class="space-y-6">
+                <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-emerald-100 space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-800">What is a Recount Text?</h3>
+                            <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                                A <strong>Recount Text</strong> is a text that tells the reader about one story, action, or activity that happened in the <strong>past</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 rounded-2xl p-4 border border-amber-200">
+                        <h4 class="font-bold text-amber-900 text-sm flex items-center mb-1">
+                            <i class="fa-solid fa-bullseye text-orange-500 mr-2"></i> Main Purpose of Recount Text
+                        </h4>
+                        <p class="text-xs text-amber-800 leading-relaxed">
+                            To <strong>retell past events or personal experiences</strong> in chronological order (time sequence) for the purpose of informing or entertaining the audience.
+                        </p>
+                    </div>
+
+                    <!-- Generic Structure Cards -->
+                    <h4 class="font-bold text-slate-800 text-base pt-2">Generic Structure of Recount Text:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200">
+                            <div class="text-xs font-black uppercase text-emerald-700 mb-1">Part 1</div>
+                            <h5 class="font-bold text-emerald-900 text-sm">1. Orientation</h5>
+                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                                Introduces <strong>WHO</strong> was involved, <strong>WHERE</strong> it happened, and <strong>WHEN</strong> it took place.
+                            </p>
+                        </div>
+                        <div class="bg-amber-50 rounded-2xl p-4 border border-amber-200">
+                            <div class="text-xs font-black uppercase text-amber-700 mb-1">Part 2</div>
+                            <h5 class="font-bold text-amber-900 text-sm">2. Events</h5>
+                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                                Tells what happened in <strong>chronological sequence</strong> (First, Next, Then, After that, Finally).
+                            </p>
+                        </div>
+                        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-200">
+                            <div class="text-xs font-black uppercase text-orange-700 mb-1">Part 3</div>
+                            <h5 class="font-bold text-orange-900 text-sm">3. Re-orientation</h5>
+                            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                                Summary or personal <strong>feeling/opinion</strong> about the experience (e.g. "We were happy!").
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs space-y-2">
+                        <span class="font-bold text-slate-700 block text-sm">Key Language Features:</span>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li>Uses <strong>Simple Past Tense</strong> (e.g., <em>visited, saw, bought, took</em>).</li>
+                            <li>Uses action verbs (e.g., <em>walked, fed, roared</em>).</li>
+                            <li>Uses time connectives (e.g., <em>First, Then, After that, Finally</em>).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2 Content: Zoo Animals Vocabulary -->
+            <div id="tab-animals" class="hidden space-y-4">
+                <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-emerald-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-900">Animals at the Zoo (Nama-nama Hewan Kebun Binatang)</h3>
+                            <p class="text-xs text-slate-500">Learn English animal names, translations, categories, and pronunciation!</p>
+                        </div>
+                        <div class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full self-start">
+                            <i class="fa-solid fa-paw mr-1"></i> 14 Animals Featured
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" id="animal-dictionary-container">
+                        <!-- Populated dynamically by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3 Content: Zoo Past Verbs Dictionary -->
+            <div id="tab-verbs" class="hidden space-y-4">
+                <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-amber-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-amber-900">Zoo Action Verbs: Present vs Past Tense</h3>
+                            <p class="text-xs text-slate-500">Click speaker icon to listen to pronunciation!</p>
+                        </div>
+                        <div class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full self-start">
+                            <i class="fa-solid fa-volume-high mr-1"></i> Audio Supported
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="verb-dictionary-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3 Content: Sample Story -->
+            <div id="tab-sample" class="hidden space-y-4">
+                <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-emerald-100">
+                    <div class="mb-4 pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase font-extrabold text-orange-500">Example Recount Text</span>
+                            <h3 class="text-2xl font-bold text-emerald-900">A Wonderful Day at Safari Zoo</h3>
+                        </div>
+                        <button onclick="speakText(sampleStoryText)" class="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-xs font-bold rounded-xl flex items-center space-x-1">
+                            <i class="fa-solid fa-volume-high"></i>
+                            <span>Read Story</span>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4 text-sm leading-relaxed text-slate-700">
+                        <!-- Orientation -->
+                        <div class="bg-emerald-50/70 p-4 rounded-2xl border-l-4 border-emerald-500">
+                            <span class="text-[10px] font-black uppercase text-emerald-700 bg-emerald-200/80 px-2 py-0.5 rounded mr-2">Orientation</span>
+                            Last Sunday, my family and I <strong>visited</strong> Ragunan Zoo in Jakarta. We <strong>went</strong> there by car early in the morning because we wanted to see all the animals.
+                        </div>
+
+                        <!-- Events -->
+                        <div class="bg-amber-50/70 p-4 rounded-2xl border-l-4 border-amber-500 space-y-2">
+                            <span class="text-[10px] font-black uppercase text-amber-700 bg-amber-200/80 px-2 py-0.5 rounded mr-2">Events</span>
+                            <p>First, we <strong>bought</strong> our entrance tickets and <strong>walked</strong> toward the primate area. We <strong>saw</strong> clever monkeys swinging on ropes.</p>
+                            <p>Next, we <strong>went</strong> to the elephant habitat. My brother <strong>fed</strong> the gentle giants with fresh carrots and bananas.</p>
+                            <p>After that, we <strong>watched</strong> a fierce lion that <strong>roared</strong> loudly inside its enclosure. I <strong>took</strong> many beautiful photos with my camera.</p>
+                        </div>
+
+                        <!-- Reorientation -->
+                        <div class="bg-orange-50/70 p-4 rounded-2xl border-l-4 border-orange-500">
+                            <span class="text-[10px] font-black uppercase text-orange-700 bg-orange-200/80 px-2 py-0.5 rounded mr-2">Re-orientation</span>
+                            Finally, we <strong>bought</strong> ice cream and <strong>headed</strong> back home at 4 PM. It <strong>was</strong> an unforgettable experience and we <strong>felt</strong> super happy!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: PRACTICE MODULE -->
+        <section id="practice-view" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <button onclick="navigateTo('main-menu-view')" class="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Dashboard</span>
+                </button>
+                <div class="text-right">
+                    <h2 class="text-2xl font-bold text-amber-800">Practice Zone</h2>
+                    <p class="text-xs text-slate-500">10 Multiple Choice • 5 Fill Blanks • 5 Matching</p>
+                </div>
+            </div>
+
+            <!-- Practice Container -->
+            <div class="bg-white rounded-3xl p-6 shadow-xl border-2 border-amber-200 space-y-8" id="practice-content-area">
+                <!-- Inserted by JS -->
+            </div>
+        </section>
+
+        <!-- VIEW 5: ASSESSMENT MODULE -->
+        <section id="assessment-view" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <button onclick="navigateTo('main-menu-view')" class="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Dashboard</span>
+                </button>
+                <div class="text-right">
+                    <h2 class="text-2xl font-bold text-orange-800">Final Assessment</h2>
+                    <p class="text-xs text-slate-500">Graded Quiz • 20 Items Total</p>
+                </div>
+            </div>
+
+            <div id="assessment-container" class="bg-white rounded-3xl p-6 shadow-xl border-2 border-orange-200 space-y-8">
+                <!-- Inserted by JS -->
+            </div>
+        </section>
+
+        <!-- VIEW 6: MINI GAME SECTION -->
+        <section id="game-view" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <button onclick="navigateTo('main-menu-view')" class="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Dashboard</span>
+                </button>
+                <h2 class="text-2xl font-bold text-teal-800">Safari Verb Dash</h2>
+            </div>
+
+            <div class="bg-gradient-to-b from-emerald-800 to-teal-900 rounded-3xl p-6 text-white shadow-2xl relative overflow-hidden border-4 border-amber-400">
+                <!-- Game Score Bar -->
+                <div class="flex items-center justify-between bg-black/30 p-4 rounded-2xl mb-6 backdrop-blur-md border border-white/10">
+                    <div>
+                        <span class="text-xs text-amber-300 font-bold block uppercase">Time Left</span>
+                        <span id="game-timer" class="text-2xl font-extrabold text-amber-400">30s</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-xs text-emerald-300 font-bold block uppercase">Score</span>
+                        <span id="game-score" class="text-3xl font-extrabold text-white">0</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-orange-300 font-bold block uppercase">Combo</span>
+                        <span id="game-combo" class="text-2xl font-extrabold text-orange-400">x1</span>
+                    </div>
+                </div>
+
+                <!-- Game Canvas Box -->
+                <div id="game-stage" class="min-h-[280px] bg-emerald-950/60 rounded-2xl p-6 border-2 border-dashed border-emerald-400/40 flex flex-col items-center justify-center text-center relative">
+                    <!-- Start Screen -->
+                    <div id="game-start-screen" class="space-y-4">
+                        <div class="w-20 h-20 bg-amber-400 text-slate-900 rounded-full mx-auto flex items-center justify-center text-4xl shadow-lg">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-amber-300">Fast Past-Verb Feeding!</h3>
+                        <p class="text-xs text-emerald-200 max-w-sm mx-auto">
+                            Animals will show a present verb (e.g. <em>"VISIT"</em>). Click the correct past verb (e.g. <em>"VISITED"</em>) to feed them before time runs out!
+                        </p>
+                        <button onclick="startGame()" class="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold rounded-2xl text-lg shadow-lg hover:scale-105 transition">
+                            Start Playing!
+                        </button>
+                    </div>
+
+                    <!-- Playing Screen -->
+                    <div id="game-play-screen" class="hidden w-full space-y-6">
+                        <div class="flex items-center justify-center space-x-3">
+                            <span id="game-animal-icon" class="text-5xl text-amber-300">🦁</span>
+                            <div class="text-left">
+                                <span class="text-xs uppercase text-emerald-300 font-bold block">Present Verb</span>
+                                <span id="game-prompt-verb" class="text-3xl font-black tracking-wider text-white">SEE</span>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-emerald-200 font-semibold">Select the correct Past Verb form:</p>
+
+                        <div class="grid grid-cols-2 gap-3 max-w-md mx-auto" id="game-options-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Game Over Screen -->
+                    <div id="game-over-screen" class="hidden space-y-4">
+                        <div class="text-5xl">🏆</div>
+                        <h3 class="text-2xl font-bold text-amber-300">Safari Dash Complete!</h3>
+                        <p class="text-sm">Final Score: <span id="game-final-score" class="font-bold text-2xl text-amber-400">0</span></p>
+                        <button onclick="startGame()" class="px-6 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold rounded-xl text-sm transition">
+                            Play Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 7: REFLECTION SECTION -->
+        <section id="reflection-view" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <button onclick="navigateTo('main-menu-view')" class="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Dashboard</span>
+                </button>
+                <h2 class="text-2xl font-bold text-lime-800">Learning Reflection</h2>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-xl border-2 border-lime-200 space-y-6">
+                <div class="bg-lime-50 p-4 rounded-2xl border border-lime-200 flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-lime-500 text-white rounded-2xl flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-face-smile-wink"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lime-900 text-base">Self-Check & Feedback</h3>
+                        <p class="text-xs text-slate-600">Think about what you learned today regarding Recount Texts & Zoo Past Verbs.</p>
+                    </div>
+                </div>
+
+                <form id="reflection-form" onsubmit="saveReflection(event)" class="space-y-6">
+                    <!-- Reflection Item 1 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">1. How confident are you in identifying the PURPOSE of a recount text?</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="border-2 border-slate-200 p-3 rounded-2xl text-center cursor-pointer hover:border-lime-500 transition has-[:checked]:bg-lime-100 has-[:checked]:border-lime-600">
+                                <input type="radio" name="ref1" value="Need Practice" class="sr-only" required>
+                                <span class="text-xl block mb-1">🤔</span>
+                                <span class="text-xs font-bold text-slate-700 block">Still Learning</span>
+                            </label>
+                            <label class="border-2 border-slate-200 p-3 rounded-2xl text-center cursor-pointer hover:border-lime-500 transition has-[:checked]:bg-lime-100 has-[:checked]:border-lime-600">
+                                <input type="radio" name="ref1" value="Good" class="sr-only">
+                                <span class="text-xl block mb-1">👍</span>
+                                <span class="text-xs font-bold text-slate-700 block">Understand</span>
+                            </label>
+                            <label class="border-2 border-slate-200 p-3 rounded-2xl text-center cursor-pointer hover:border-lime-500 transition has-[:checked]:bg-lime-100 has-[:checked]:border-lime-600">
+                                <input type="radio" name="ref1" value="Mastered" class="sr-only">
+                                <span class="text-xl block mb-1">🌟</span>
+                                <span class="text-xs font-bold text-slate-700 block">Mastered!</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Reflection Item 2 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">2. Can you remember past tense forms for zoo verbs (e.g. see ➔ saw, feed ➔ fed)?</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="border-2 border-slate-200 p-3 rounded-2xl text-center cursor-pointer hover:border-lime-500 transition has-[:checked]:bg-lime-100 has-[:checked]:border-lime-600">
+                                <input type="radio" name="ref2" value="Few Verbs" class="sr-only" required>
+                                <span class="text-xl block mb-1">🌱</span>
+                                <span class="text-xs font-bold text-slate-700 block">A few of them</span>
+                            </label>
+                            <label class="border-2 border-slate-200 p-3 rounded-2xl text-center cursor-pointer hover:border-lime-500 transition has-[:checked]:bg-lime-100 has-[:checked]:border-lime-600">
+                                <input type="radio" name="ref2" value="Most Verbs" class="sr-only">
+                                <span class="text-xl block mb-1">🌿</span>
+                                <span class="text-xs font-bold text-slate-700 block">Most of them</span>
+                            </label>
+                            <label class="border-2 border-slate-200 p-3 rounded-2xl text-center cursor-pointer hover:border-lime-500 transition has-[:checked]:bg-lime-100 has-[:checked]:border-lime-600">
+                                <input type="radio" name="ref2" value="All Verbs" class="sr-only">
+                                <span class="text-xl block mb-1">🌳</span>
+                                <span class="text-xs font-bold text-slate-700 block">All of them!</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Open Journal -->
+                    <div class="space-y-1">
+                        <label for="ref-note" class="block text-sm font-bold text-slate-800">3. Write 1 recount sentence about a past zoo trip or favorite animal:</label>
+                        <textarea id="ref-note" rows="3" placeholder="e.g. Last month, I went to the zoo and saw a big tiger." class="w-full p-3 rounded-2xl border-2 border-slate-200 focus:border-lime-500 focus:ring-2 focus:ring-lime-200 outline-none text-sm font-medium"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-lime-600 hover:bg-lime-700 text-white font-bold rounded-2xl shadow-lg transition">
+                        Save Reflection Entry
+                    </button>
+                </form>
+
+                <!-- Feedback Toast -->
+                <div id="reflection-saved-msg" class="hidden p-4 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-2xl text-xs font-bold text-center">
+                    <i class="fa-solid fa-circle-check text-base mr-1"></i> Reflection saved successfully! Great job working hard today!
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-4 text-center text-xs mt-10">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>&copy; 2026 Safari Verb Quest • Grade 7 English Interactive Learning Media</span>
+            <span class="text-amber-400 font-semibold"><i class="fa-solid fa-tree text-emerald-500 mr-1"></i> Interactive Recount Text Module</span>
+        </div>
+    </footer>
+
+    <script>
+        // --- GLOBAL STATE ---
+        let currentUser = {
+            name: '',
+            className: ''
+        };
+
+        const classes = ['7A', '7B', '7C', '7D', '7E', '7F', '7G', '7H', '7I'];
+
+        // Zoo Animals Vocabulary Data
+        const zooAnimalsData = [
+            { name: 'Lion', indonesian: 'Singa', category: 'Carnivore', icon: '🦁', fact: 'Known as the King of the Jungle with a mighty roar.' },
+            { name: 'Elephant', indonesian: 'Gajah', category: 'Herbivore', icon: '🐘', fact: 'The largest land animal with big ears and a long trunk.' },
+            { name: 'Giraffe', indonesian: 'Jerapah', category: 'Herbivore', icon: '🦒', fact: 'Has a long neck to eat fresh leaves from tall trees.' },
+            { name: 'Tiger', indonesian: 'Harimau', category: 'Carnivore', icon: '🐯', fact: 'A wild big cat with distinct black stripes.' },
+            { name: 'Monkey', indonesian: 'Monyet', category: 'Primate', icon: '🐵', fact: 'Loves swinging on tree branches and eating bananas.' },
+            { name: 'Crocodile', indonesian: 'Buaya', category: 'Reptile', icon: '🐊', fact: 'A dangerous reptile with sharp teeth living near rivers.' },
+            { name: 'Hippo', indonesian: 'Kuda Nil', category: 'Herbivore', icon: '🦛', fact: 'Spends most of its day submerged in cool water.' },
+            { name: 'Flamingo', indonesian: 'Burung Flamingo', category: 'Bird', icon: '🦩', fact: 'A pink water bird that stands on one slender leg.' },
+            { name: 'Kangaroo', indonesian: 'Kanguru', category: 'Herbivore', icon: '🦘', fact: 'Hops fast and carries its baby in its front pouch.' },
+            { name: 'Panda', indonesian: 'Panda', category: 'Herbivore', icon: '🐼', fact: 'A cute black and white bear that eats bamboo stems.' },
+            { name: 'Snake', indonesian: 'Ular', category: 'Reptile', icon: '🐍', fact: 'A legless reptile that slithers quietly along the ground.' },
+            { name: 'Parrot', indonesian: 'Burung Beo', category: 'Bird', icon: '🦜', fact: 'A colorful bird that can mimic human sounds.' },
+            { name: 'Penguin', indonesian: 'Penguin', category: 'Bird', icon: '🐧', fact: 'A flightless bird that waddles on ice and swims fast.' },
+            { name: 'Zebra', indonesian: 'Zebra', category: 'Herbivore', icon: '🦓', fact: 'Has unique black and white stripes on its body.' }
+        ];
+
+        // Zoo Verbs Vocabulary Data
+        const zooVerbsData = [
+            { present: 'visit', past: 'visited', meaning: 'mengunjungi', icon: '🐾' },
+            { present: 'see', past: 'saw', meaning: 'melihat', icon: '🦁' },
+            { present: 'feed', past: 'fed', meaning: 'memberi makan', icon: '🦒' },
+            { present: 'walk', past: 'walked', meaning: 'berjalan', icon: '🚶' },
+            { present: 'watch', past: 'watched', meaning: 'menonton/mengamati', icon: '👀' },
+            { present: 'take photo', past: 'took photos', meaning: 'mengambil foto', icon: '📷' },
+            { present: 'roar', past: 'roared', meaning: 'meraung', icon: '🐯' },
+            { present: 'buy', past: 'bought', meaning: 'membeli', icon: '🎟️' },
+            { present: 'enjoy', past: 'enjoyed', meaning: 'menikmati', icon: '😊' },
+            { present: 'touch', past: 'touched', meaning: 'menyentuh', icon: '✋' },
+            { present: 'go', past: 'went', meaning: 'pergi', icon: '🚗' },
+            { present: 'hear', past: 'heard', meaning: 'mendengar', icon: '👂' }
+        ];
+
+        const sampleStoryText = "Last Sunday, my family and I visited Ragunan Zoo in Jakarta. First, we bought tickets and walked to the monkey area. We saw clever monkeys swinging. Next, my brother fed the elephants. After that, we watched a lion that roared loudly. Finally, we bought ice cream and felt super happy!";
+
+        // Audio Synthesis & Web Audio SFX
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1); // A5
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else if (type === 'wrong') {
+                    osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+                    osc.frequency.setValueAtTime(164.81, ctx.currentTime + 0.15); // E3
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+                }
+            } catch (e) {
+                // Audio fallback silence
+            }
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Navigation Logic
+        function navigateTo(viewId) {
+            const views = ['identity-view', 'main-menu-view', 'materials-view', 'practice-view', 'assessment-view', 'game-view', 'reflection-view'];
+            views.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+
+            const target = document.getElementById(viewId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Init dynamic views on navigation
+            if (viewId === 'practice-view') renderPracticeModule();
+            if (viewId === 'assessment-view') renderAssessmentModule();
+        }
+
+        // Initialize Identity Class Picker
+        function initClassPicker() {
+            const container = document.getElementById('class-options');
+            container.innerHTML = '';
+            classes.forEach((c, idx) => {
+                const isFirst = idx === 0;
+                container.innerHTML += `
+                    <label class="cursor-pointer">
+                        <input type="radio" name="classSelect" value="${c}" class="sr-only" ${isFirst ? 'checked' : ''} required>
+                        <div class="py-2.5 text-center font-bold text-sm rounded-xl border-2 border-slate-200 text-slate-700 hover:border-emerald-500 transition select-none flex items-center justify-center">
+                            <span>${c}</span>
+                        </div>
+                    </label>
+                `;
+            });
+
+            // Styling script for radio buttons
+            container.querySelectorAll('input').forEach(radio => {
+                radio.addEventListener('change', updateRadioStyles);
+            });
+            updateRadioStyles();
+        }
+
+        function updateRadioStyles() {
+            const container = document.getElementById('class-options');
+            container.querySelectorAll('label').forEach(label => {
+                const radio = label.querySelector('input');
+                const div = label.querySelector('div');
+                if (radio.checked) {
+                    div.className = 'py-2.5 text-center font-bold text-sm rounded-xl border-2 border-emerald-600 bg-emerald-100 text-emerald-900 shadow-sm select-none flex items-center justify-center';
+                } else {
+                    div.className = 'py-2.5 text-center font-bold text-sm rounded-xl border-2 border-slate-200 text-slate-700 hover:border-emerald-500 transition select-none flex items-center justify-center';
+                }
+            });
+        }
+
+        function handleIdentitySubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value.trim();
+            const selectedClass = document.querySelector('input[name="classSelect"]:checked')?.value || '7A';
+
+            if (!name) return;
+
+            currentUser.name = name;
+            currentUser.className = selectedClass;
+
+            // Update UI elements
+            document.getElementById('header-user-name').innerText = currentUser.name;
+            document.getElementById('header-user-class').innerText = 'Class ' + currentUser.className;
+            document.getElementById('dash-user-name').innerText = currentUser.name;
+            document.getElementById('user-header-profile').classList.remove('hidden');
+            document.getElementById('user-header-profile').classList.add('flex');
+
+            navigateTo('main-menu-view');
+        }
+
+        function logout() {
+            currentUser = { name: '', className: '' };
+            document.getElementById('user-header-profile').classList.add('hidden');
+            document.getElementById('student-name').value = '';
+            navigateTo('identity-view');
+        }
+
+        // Material Tabs Switcher
+        function switchMaterialTab(tabId) {
+            ['tab-recount', 'tab-animals', 'tab-verbs', 'tab-sample'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(tabId);
+            if (target) target.classList.remove('hidden');
+
+            ['btn-tab-recount', 'btn-tab-animals', 'btn-tab-verbs', 'btn-tab-sample'].forEach(btnId => {
+                const btn = document.getElementById(btnId);
+                if (btn) btn.className = 'flex-1 py-2.5 rounded-xl transition text-slate-600 hover:text-slate-900 text-center font-bold';
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) activeBtn.className = 'flex-1 py-2.5 rounded-xl transition bg-white text-emerald-800 shadow-sm text-center font-bold';
+        }
+
+        // Render Zoo Animals Dictionary Cards
+        function renderAnimalDictionary() {
+            const container = document.getElementById('animal-dictionary-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            zooAnimalsData.forEach(a => {
+                let catColor = a.category === 'Carnivore' ? 'bg-red-100 text-red-700' :
+                               a.category === 'Herbivore' ? 'bg-emerald-100 text-emerald-800' :
+                               a.category === 'Bird' ? 'bg-sky-100 text-sky-800' :
+                               a.category === 'Reptile' ? 'bg-amber-100 text-amber-800' : 'bg-purple-100 text-purple-800';
+
+                container.innerHTML += `
+                    <div class="bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-200 flex flex-col justify-between hover:bg-emerald-100/80 transition space-y-2">
+                        <div class="flex items-start justify-between">
+                            <span class="text-3xl">${a.icon}</span>
+                            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full ${catColor}">${a.category}</span>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-extrabold text-emerald-950 text-base leading-tight">${a.name}</h4>
+                                <button onclick="speakText('${a.name}')" title="Listen" class="w-7 h-7 bg-white text-emerald-700 rounded-full flex items-center justify-center shadow-xs hover:bg-emerald-600 hover:text-white transition">
+                                    <i class="fa-solid fa-volume-high text-[11px]"></i>
+                                </button>
+                            </div>
+                            <span class="text-xs text-emerald-700 italic font-semibold">${a.indonesian}</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600 leading-snug bg-white/70 p-2 rounded-xl border border-emerald-100">${a.fact}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Render Verb Dictionary Cards
+        function renderVerbDictionary() {
+            const container = document.getElementById('verb-dictionary-container');
+            container.innerHTML = '';
+            zooVerbsData.forEach(v => {
+                container.innerHTML += `
+                    <div class="bg-amber-50/80 p-3.5 rounded-2xl border border-amber-200 flex items-center justify-between hover:bg-amber-100 transition">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">${v.icon}</span>
+                            <div>
+                                <div class="text-xs font-bold text-slate-500 uppercase">${v.present} ➔ <span class="text-emerald-700 font-extrabold text-sm">${v.past}</span></div>
+                                <span class="text-xs text-slate-600 italic">(${v.meaning})</span>
+                            </div>
+                        </div>
+                        <button onclick="speakText('${v.present}, past form: ${v.past}')" class="w-8 h-8 bg-white rounded-full text-emerald-700 hover:bg-emerald-600 hover:text-white flex items-center justify-center shadow-sm transition">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // PRACTICE QUESTIONS DATA (10 MC, 5 Fill, 5 Match)
+        const practiceMC = [
+            { q: "What is the primary purpose of a Recount Text?", options: ["To describe how to cook zoo food", "To retell past events or experiences", "To persuade people to adopt lions", "To explain why giraffes are tall"], answer: 1 },
+            { q: "Which tense is mainly used in writing a recount text?", options: ["Simple Present Tense", "Simple Past Tense", "Future Tense", "Present Continuous Tense"], answer: 1 },
+            { q: "What part of recount text introduces WHO, WHERE, and WHEN?", options: ["Orientation", "Events", "Re-orientation", "Resolution"], answer: 0 },
+            { q: "What is the past form of the verb 'SEE' when talking about zoo animals?", options: ["Seed", "Saw", "Seen", "Seeing"], answer: 1 },
+            { q: "Which of the following is an example of Re-orientation?", options: ["First, we bought entrance tickets.", "Last Sunday, I went to Ragunan Zoo.", "We felt very happy after our visit!", "My brother fed the giraffes."], answer: 2 },
+            { q: "What is the past form of 'FEED'?", options: ["Feeded", "Fed", "Food", "Feeding"], answer: 1 },
+            { q: "In recount texts, words like 'First', 'Next', and 'Finally' are called...", options: ["Nouns", "Time Connectives", "Adjectives", "Pronouns"], answer: 1 },
+            { q: "My sister _____ many cute monkeys swinging on trees yesterday.", options: ["watch", "watched", "watching", "watches"], answer: 1 },
+            { q: "The fierce lion _____ loudly when we stood near its cage.", options: ["roar", "roaring", "roared", "roars"], answer: 2 },
+            { q: "What does the 'Events' section in a recount text contain?", options: ["The final personal comment", "A list of future plans", "A chronological series of past activities", "The author's biography"], answer: 2 }
+        ];
+
+        const practiceFill = [
+            { q: "Yesterday, my uncle and I _____ (visit) the wildlife sanctuary.", answer: "visited" },
+            { q: "We _____ (buy) two tickets at the entrance gate.", answer: "bought" },
+            { q: "The big elephant _____ (eat) fresh green leaves from my hand.", answer: "ate" },
+            { q: "I _____ (take) many beautiful photos of the pink flamingos.", answer: "took" },
+            { q: "We _____ (go) home happily at 5 PM.", answer: "went" }
+        ];
+
+        const practiceMatch = [
+            { id: 1, left: "Orientation", right: "Introduces WHO, WHERE, and WHEN" },
+            { id: 2, left: "Events", right: "Tells what happened in sequence" },
+            { id: 3, left: "Re-orientation", right: "Personal feeling or summary" },
+            { id: 4, left: "Past form of 'go'", right: "went" },
+            { id: 5, left: "Past form of 'roar'", right: "roared" }
+        ];
+
+        // ASSESSMENT QUESTIONS DATA (10 MC, 5 Fill, 5 Match)
+        const assessMC = [
+            { q: "Recount text is written to inform or entertain readers by...", options: ["Retelling a past event", "Giving step-by-step instructions", "Describing a place in general", "Arguing about zoo safety"], answer: 0 },
+            { q: "Which paragraph structure gives a concluding personal thought?", options: ["Events", "Orientation", "Re-orientation", "Identification"], answer: 2 },
+            { q: "Choose the correct past verb: 'We _____ delicious snacks at the zoo cafe.'", options: ["buyed", "bought", "buys", "buying"], answer: 1 },
+            { q: "Which sentence belongs to the ORIENTATION section?", options: ["We felt exhausted but excited.", "Last Saturday, Grade 7 students went to Surabaya Zoo.", "After that, we watched the dolphin show.", "Finally, we took a photo together."], answer: 1 },
+            { q: "What is the past tense form of 'WALK'?", options: ["Walked", "Woke", "Walking", "Walks"], answer: 0 },
+            { q: "Which of these action verbs is NOT in simple past tense?", options: ["enjoyed", "touched", "swimming", "heard"], answer: 2 },
+            { q: "Read: 'First, we entered the reptile house.' This sentence is part of...", options: ["Orientation", "Events", "Re-orientation", "Title"], answer: 1 },
+            { q: "What is the past form of 'TAKE'?", options: ["Taked", "Took", "Taken", "Taking"], answer: 1 },
+            { q: "Why do we use time connectives like 'Then' and 'After that' in Recount Texts?", options: ["To make sentences longer", "To show the correct time order of events", "To describe animal colors", "To ask questions"], answer: 1 },
+            { q: "Choose the correct sentence in Simple Past Tense:", options: ["I see a tiger yesterday.", "I saw a tiger yesterday.", "I am seeing a tiger yesterday.", "I will see a tiger yesterday."], answer: 1 }
+        ];
+
+        const assessFill = [
+            { q: "My class _____ (enjoy) watching the penguin feeding show.", answer: "enjoyed" },
+            { q: "The loud parrot _____ (hear) my voice and copied it.", answer: "heard" },
+            { q: "We _____ (touch) the friendly tortoise in the petting area.", answer: "touched" },
+            { q: "My father _____ (drive) us home after visiting the safari park.", answer: "drove" },
+            { q: "The zookeeper _____ (tell) us interesting facts about tigers.", answer: "told" }
+        ];
+
+        const assessMatch = [
+            { id: 101, left: "Recount Purpose", right: "Retell past experiences" },
+            { id: 102, left: "Past form of 'see'", right: "saw" },
+            { id: 103, left: "Past form of 'feed'", right: "fed" },
+            { id: 104, left: "Past form of 'buy'", right: "bought" },
+            { id: 105, left: "Chronological Order", right: "First, Next, Then, Finally" }
+        ];
+
+        // RENDER PRACTICE MODULE
+        function renderPracticeModule() {
+            const area = document.getElementById('practice-content-area');
+            area.innerHTML = '';
+
+            // Section 1: Multiple Choice
+            let mcHTML = `
+                <div class="space-y-4">
+                    <div class="bg-amber-100 p-3 rounded-2xl font-bold text-amber-900 text-sm flex items-center">
+                        <i class="fa-solid fa-list-check mr-2 text-amber-600"></i> Part A: Multiple Choice (10 Items)
+                    </div>
+                    <div class="space-y-6">
+            `;
+
+            practiceMC.forEach((item, idx) => {
+                mcHTML += `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <p class="font-bold text-sm text-slate-800">${idx + 1}. ${item.q}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                `;
+                item.options.forEach((opt, optIdx) => {
+                    mcHTML += `
+                        <button onclick="checkPracticeMC(${idx}, ${optIdx})" id="pmc-${idx}-${optIdx}" class="p-3 rounded-xl border-2 border-slate-200 text-left text-xs font-semibold hover:border-amber-400 bg-white transition">
+                            <span class="font-extrabold mr-1 text-slate-400">${String.fromCharCode(65 + optIdx)}.</span> ${opt}
+                        </button>
+                    `;
+                });
+                mcHTML += `
+                        </div>
+                        <div id="pmc-feedback-${idx}" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+                    </div>
+                `;
+            });
+            mcHTML += `</div></div>`;
+
+            // Section 2: Fill in the Blanks
+            let fillHTML = `
+                <div class="space-y-4 pt-4 border-t border-slate-200">
+                    <div class="bg-emerald-100 p-3 rounded-2xl font-bold text-emerald-900 text-sm flex items-center">
+                        <i class="fa-solid fa-pen-to-square mr-2 text-emerald-600"></i> Part B: Fill in the Blank (5 Items)
+                    </div>
+                    <div class="space-y-4">
+            `;
+            practiceFill.forEach((item, idx) => {
+                fillHTML += `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-sm text-slate-800">${idx + 1}. ${item.q}</p>
+                        <div class="flex items-center space-x-2">
+                            <input type="text" id="pfill-input-${idx}" placeholder="Type past verb..." class="p-2.5 rounded-xl border-2 border-slate-200 text-xs font-bold outline-none focus:border-emerald-500 w-48">
+                            <button onclick="checkPracticeFill(${idx})" class="px-4 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition">Check</button>
+                        </div>
+                        <div id="pfill-feedback-${idx}" class="hidden p-2.5 rounded-xl text-xs font-bold"></div>
+                    </div>
+                `;
+            });
+            fillHTML += `</div></div>`;
+
+            // Section 3: Matching
+            let matchHTML = `
+                <div class="space-y-4 pt-4 border-t border-slate-200">
+                    <div class="bg-orange-100 p-3 rounded-2xl font-bold text-orange-900 text-sm flex items-center">
+                        <i class="fa-solid fa-link mr-2 text-orange-600"></i> Part C: Matching Pairs (5 Items)
+                    </div>
+                    <p class="text-xs text-slate-500">Select a term on the left, then select its matching definition on the right.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-2" id="pmatch-left-col"></div>
+                        <div class="space-y-2" id="pmatch-right-col"></div>
+                    </div>
+                    <div id="pmatch-status" class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-bold text-amber-800 text-center">
+                        Select a left item first!
+                    </div>
+                </div>
+            `;
+
+            area.innerHTML = mcHTML + fillHTML + matchHTML;
+            renderPracticeMatching();
+        }
+
+        function checkPracticeMC(qIdx, optIdx) {
+            const item = practiceMC[qIdx];
+            const feedbackEl = document.getElementById(`pmc-feedback-${qIdx}`);
+            
+            item.options.forEach((_, idx) => {
+                const btn = document.getElementById(`pmc-${qIdx}-${idx}`);
+                btn.disabled = true;
+                if (idx === item.answer) {
+                    btn.className = "p-3 rounded-xl border-2 border-emerald-500 bg-emerald-100 text-emerald-900 text-left text-xs font-bold";
+                } else if (idx === optIdx && optIdx !== item.answer) {
+                    btn.className = "p-3 rounded-xl border-2 border-red-400 bg-red-100 text-red-900 text-left text-xs font-bold";
+                }
+            });
+
+            feedbackEl.classList.remove('hidden');
+            if (optIdx === item.answer) {
+                playSound('correct');
+                feedbackEl.className = "p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300";
+                feedbackEl.innerHTML = "<i class='fa-solid fa-circle-check mr-1'></i> Correct! Outstanding job!";
+            } else {
+                playSound('wrong');
+                feedbackEl.className = "p-3 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300";
+                feedbackEl.innerHTML = `<i class='fa-solid fa-circle-xmark mr-1'></i> Incorrect. The right answer is: <strong>${item.options[item.answer]}</strong>`;
+            }
+        }
+
+        function checkPracticeFill(idx) {
+            const input = document.getElementById(`pfill-input-${idx}`).value.trim().toLowerCase();
+            const correct = practiceFill[idx].answer.toLowerCase();
+            const feedbackEl = document.getElementById(`pfill-feedback-${idx}`);
+
+            feedbackEl.classList.remove('hidden');
+            if (input === correct) {
+                playSound('correct');
+                feedbackEl.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300";
+                feedbackEl.innerHTML = "<i class='fa-solid fa-circle-check mr-1'></i> Perfect! Correct past verb form.";
+            } else {
+                playSound('wrong');
+                feedbackEl.className = "p-2.5 rounded-xl text-xs font-bold bg-red-100 text-red-800 border border-red-300";
+                feedbackEl.innerHTML = `<i class='fa-solid fa-circle-xmark mr-1'></i> Incorrect. Correct word is: <strong>${practiceFill[idx].answer}</strong>`;
+            }
+        }
+
+        // Matching State Variables
+        let practiceMatchSelectedLeft = null;
+        let practiceMatchedPairs = [];
+
+        function renderPracticeMatching() {
+            const leftCol = document.getElementById('pmatch-left-col');
+            const rightCol = document.getElementById('pmatch-right-col');
+            if (!leftCol || !rightCol) return;
+
+            leftCol.innerHTML = '';
+            rightCol.innerHTML = '';
+
+            // Shuffle right column options for variety
+            const shuffledRight = [...practiceMatch].sort(() => 0.5 - Math.random());
+
+            practiceMatch.forEach(item => {
+                leftCol.innerHTML += `
+                    <button onclick="selectPracticeMatchLeft(${item.id})" id="pmatch-left-${item.id}" class="w-full p-3 bg-white border-2 border-slate-200 rounded-xl text-left text-xs font-bold text-slate-700 hover:border-amber-400 transition">
+                        ${item.left}
+                    </button>
+                `;
+            });
+
+            shuffledRight.forEach(item => {
+                rightCol.innerHTML += `
+                    <button onclick="selectPracticeMatchRight(${item.id})" id="pmatch-right-${item.id}" class="w-full p-3 bg-white border-2 border-slate-200 rounded-xl text-left text-xs font-bold text-slate-700 hover:border-orange-400 transition">
+                        ${item.right}
+                    </button>
+                `;
+            });
+        }
+
+        function selectPracticeMatchLeft(id) {
+            practiceMatchSelectedLeft = id;
+            practiceMatch.forEach(item => {
+                const btn = document.getElementById(`pmatch-left-${item.id}`);
+                if (btn) {
+                    if (item.id === id) {
+                        btn.className = "w-full p-3 bg-amber-100 border-2 border-amber-500 rounded-xl text-left text-xs font-extrabold text-amber-900 shadow-sm";
+                    } else if (!practiceMatchedPairs.includes(item.id)) {
+                        btn.className = "w-full p-3 bg-white border-2 border-slate-200 rounded-xl text-left text-xs font-bold text-slate-700 hover:border-amber-400 transition";
+                    }
+                }
+            });
+
+            document.getElementById('pmatch-status').innerText = "Now select the matching item from the right column!";
+        }
+
+        function selectPracticeMatchRight(rightId) {
+            if (!practiceMatchSelectedLeft) return;
+
+            const statusEl = document.getElementById('pmatch-status');
+
+            if (practiceMatchSelectedLeft === rightId) {
+                playSound('correct');
+                practiceMatchedPairs.push(rightId);
+
+                const leftBtn = document.getElementById(`pmatch-left-${practiceMatchSelectedLeft}`);
+                const rightBtn = document.getElementById(`pmatch-right-${rightId}`);
+
+                if (leftBtn) {
+                    leftBtn.className = "w-full p-3 bg-emerald-100 border-2 border-emerald-500 rounded-xl text-left text-xs font-extrabold text-emerald-900";
+                    leftBtn.disabled = true;
+                }
+                if (rightBtn) {
+                    rightBtn.className = "w-full p-3 bg-emerald-100 border-2 border-emerald-500 rounded-xl text-left text-xs font-extrabold text-emerald-900";
+                    rightBtn.disabled = true;
+                }
+
+                statusEl.className = "p-3 bg-emerald-100 border border-emerald-300 rounded-xl text-xs font-bold text-emerald-800 text-center";
+                statusEl.innerText = "Match Correct! Keep going!";
+
+                practiceMatchSelectedLeft = null;
+            } else {
+                playSound('wrong');
+                statusEl.className = "p-3 bg-red-100 border border-red-300 rounded-xl text-xs font-bold text-red-800 text-center";
+                statusEl.innerText = "Not a match! Try selecting another pair.";
+            }
+        }
+
+        // RENDER ASSESSMENT MODULE
+        function renderAssessmentModule() {
+            const container = document.getElementById('assessment-container');
+            container.innerHTML = '';
+
+            let html = `
+                <div class="bg-orange-50 border border-orange-200 p-4 rounded-2xl flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase text-orange-600 block">Official Test Mode</span>
+                        <p class="text-xs text-slate-600">Answer all questions, then click 'Submit Assessment' at the bottom.</p>
+                    </div>
+                    <div class="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">
+                        Total Points: 100
+                    </div>
+                </div>
+
+                <form id="assessment-form" onsubmit="handleAssessmentSubmit(event)" class="space-y-8">
+            `;
+
+            // Part A: MC (10 Items)
+            html += `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-sm text-slate-800 uppercase tracking-wide bg-slate-100 p-3 rounded-xl border border-slate-200">
+                        Section I: Multiple Choice (10 Items x 5 pts = 50 pts)
+                    </h3>
+            `;
+            assessMC.forEach((item, idx) => {
+                html += `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-xs text-slate-800">${idx + 1}. ${item.q}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                `;
+                item.options.forEach((opt, optIdx) => {
+                    html += `
+                        <label class="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-orange-400 cursor-pointer flex items-center space-x-2 text-xs font-medium has-[:checked]:bg-orange-100 has-[:checked]:border-orange-500">
+                            <input type="radio" name="amc-${idx}" value="${optIdx}" required class="accent-orange-500">
+                            <span>${opt}</span>
+                        </label>
+                    `;
+                });
+                html += `</div></div>`;
+            });
+            html += `</div>`;
+
+            // Part B: Fill in the Blanks (5 Items x 5 pts = 25 pts)
+            html += `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-sm text-slate-800 uppercase tracking-wide bg-slate-100 p-3 rounded-xl border border-slate-200">
+                        Section II: Fill in the Blank (5 Items x 5 pts = 25 pts)
+                    </h3>
+            `;
+            assessFill.forEach((item, idx) => {
+                html += `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <label class="block font-bold text-xs text-slate-800">${idx + 1}. ${item.q}</label>
+                        <input type="text" id="afill-${idx}" required placeholder="Type answer here..." class="p-2.5 rounded-xl border border-slate-200 text-xs font-bold outline-none focus:border-orange-500 w-full max-w-xs">
+                    </div>
+                `;
+            });
+            html += `</div>`;
+
+            // Part C: Matching (5 Items x 5 pts = 25 pts)
+            html += `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-sm text-slate-800 uppercase tracking-wide bg-slate-100 p-3 rounded-xl border border-slate-200">
+                        Section III: Matching (Select option from dropdown) (5 Items x 5 pts = 25 pts)
+                    </h3>
+            `;
+            assessMatch.forEach((item, idx) => {
+                html += `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span class="font-bold text-xs text-slate-800">${idx + 1}. ${item.left}</span>
+                        <select id="amatch-${idx}" required class="p-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold outline-none focus:border-orange-500">
+                            <option value="">-- Choose Match --</option>
+                            ${assessMatch.map(m => `<option value="${m.right}">${m.right}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+
+            html += `
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-base rounded-2xl shadow-xl hover:from-orange-600 hover:to-amber-600 transition">
+                        Submit Final Assessment
+                    </button>
+                </form>
+
+                <div id="assessment-result-card" class="hidden space-y-6"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function handleAssessmentSubmit(e) {
+            e.preventDefault();
+
+            let score = 0;
+
+            // Score MC
+            assessMC.forEach((item, idx) => {
+                const selected = document.querySelector(`input[name="amc-${idx}"]:checked`)?.value;
+                if (parseInt(selected) === item.answer) {
+                    score += 5;
+                }
+            });
+
+            // Score Fill
+            assessFill.forEach((item, idx) => {
+                const val = document.getElementById(`afill-${idx}`)?.value.trim().toLowerCase();
+                if (val === item.answer.toLowerCase()) {
+                    score += 5;
+                }
+            });
+
+            // Score Match
+            assessMatch.forEach((item, idx) => {
+                const val = document.getElementById(`amatch-${idx}`)?.value;
+                if (val === item.right) {
+                    score += 5;
+                }
+            });
+
+            // Hide form and show Certificate/Report
+            document.getElementById('assessment-form').classList.add('hidden');
+
+            const resultCard = document.getElementById('assessment-result-card');
+            resultCard.classList.remove('hidden');
+
+            let gradeBadge = score >= 80 ? "🏆 Excellent Explorer!" : score >= 60 ? "🌿 Good Job!" : "🌱 Keep Learning!";
+
+            resultCard.innerHTML = `
+                <div class="bg-gradient-to-b from-amber-50 to-orange-50 rounded-3xl p-6 border-4 border-amber-400 text-center space-y-4 shadow-xl">
+                    <div class="text-4xl">🎉</div>
+                    <span class="bg-amber-400 text-slate-900 font-extrabold text-xs uppercase px-3 py-1 rounded-full">
+                        Official Safari Explorer Certificate
+                    </span>
+                    
+                    <h3 class="text-2xl font-extrabold text-slate-800">${currentUser.name || 'Student'}</h3>
+                    <p class="text-xs font-bold text-slate-500">Class: ${currentUser.className || '7A'}</p>
+
+                    <div class="my-4 py-4 bg-white rounded-2xl border-2 border-amber-200 max-w-xs mx-auto shadow-sm">
+                        <span class="text-xs uppercase font-extrabold text-slate-400 block">Final Score</span>
+                        <span class="text-5xl font-black text-orange-500">${score}</span>
+                        <span class="text-xs text-slate-400 block">/ 100 Points</span>
+                    </div>
+
+                    <p class="text-sm font-bold text-emerald-700">${gradeBadge}</p>
+
+                    <button onclick="renderAssessmentModule()" class="px-6 py-2.5 bg-orange-500 text-white text-xs font-bold rounded-xl hover:bg-orange-600 transition">
+                        Retake Assessment
+                    </button>
+                </div>
+            `;
+
+            playSound(score >= 60 ? 'correct' : 'wrong');
+        }
+
+        // MINI GAME LOGIC
+        let gameScore = 0;
+        let gameCombo = 1;
+        let gameTimeLeft = 30;
+        let gameTimerInterval = null;
+        let currentPromptItem = null;
+
+        function startGame() {
+            gameScore = 0;
+            gameCombo = 1;
+            gameTimeLeft = 30;
+
+            document.getElementById('game-start-screen').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.add('hidden');
+            document.getElementById('game-play-screen').classList.remove('hidden');
+
+            updateGameScoreboard();
+
+            clearInterval(gameTimerInterval);
+            gameTimerInterval = setInterval(() => {
+                gameTimeLeft--;
+                document.getElementById('game-timer').innerText = gameTimeLeft + 's';
+
+                if (gameTimeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            nextGameQuestion();
+        }
+
+        function updateGameScoreboard() {
+            document.getElementById('game-score').innerText = gameScore;
+            document.getElementById('game-combo').innerText = 'x' + gameCombo;
+            document.getElementById('game-timer').innerText = gameTimeLeft + 's';
+        }
+
+        function nextGameQuestion() {
+            const animals = ['🦁', '🦒', '🐘', '🐯', '🐵', '🦛'];
+            const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+            document.getElementById('game-animal-icon').innerText = randomAnimal;
+
+            currentPromptItem = zooVerbsData[Math.floor(Math.random() * zooVerbsData.length)];
+            document.getElementById('game-prompt-verb').innerText = currentPromptItem.present.toUpperCase();
+
+            // Prepare 4 choices (1 correct + 3 distractor past verbs)
+            let choices = [currentPromptItem.past];
+            while (choices.length < 4) {
+                const randVerb = zooVerbsData[Math.floor(Math.random() * zooVerbsData.length)].past;
+                if (!choices.includes(randVerb)) choices.push(randVerb);
+            }
+            choices.sort(() => 0.5 - Math.random());
+
+            const container = document.getElementById('game-options-container');
+            container.innerHTML = '';
+            choices.forEach(choice => {
+                container.innerHTML += `
+                    <button onclick="handleGameAnswer('${choice}')" class="p-3 bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold rounded-xl text-sm transition transform active:scale-95 shadow">
+                        ${choice}
+                    </button>
+                `;
+            });
+        }
+
+        function handleGameAnswer(selectedPast) {
+            if (selectedPast === currentPromptItem.past) {
+                playSound('correct');
+                gameScore += 10 * gameCombo;
+                gameCombo = Math.min(gameCombo + 1, 5);
+            } else {
+                playSound('wrong');
+                gameCombo = 1;
+            }
+            updateGameScoreboard();
+            nextGameQuestion();
+        }
+
+        function endGame() {
+            clearInterval(gameTimerInterval);
+            document.getElementById('game-play-screen').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.remove('hidden');
+            document.getElementById('game-final-score').innerText = gameScore;
+        }
+
+        // Reflection Form Handler
+        function saveReflection(e) {
+            e.preventDefault();
+            const msg = document.getElementById('reflection-saved-msg');
+            msg.classList.remove('hidden');
+            playSound('correct');
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Window Onload Initialization
+        window.onload = function() {
+            initClassPicker();
+            renderAnimalDictionary();
+            renderVerbDictionary();
+        };
+    </script>
+</body>
+</html>
